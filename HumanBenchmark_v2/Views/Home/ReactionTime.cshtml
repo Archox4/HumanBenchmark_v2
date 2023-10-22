@@ -1,0 +1,59 @@
+﻿
+    <div id="reaction_box"><p id="text1">Click to start</p></div>
+    <p>@ViewBag.reactionTime</p>
+
+
+    @section scripts {
+        <script type ="text/javascript">
+            
+        
+            $(function () {
+            var date1 = new Date();
+            var date2 = new Date();
+
+
+            $("#reaction_box").css("background-color", "white");
+
+
+                $("#reaction_box").on("click", async function () {
+                if ($("#text1").text() == "When box turns green click it fastest you can...") {
+                    console.log("too fast");
+                } else if ($("#text1").text() == "Click now") {
+                    date1 = new Date();
+                    var result = date1 - date2;
+                    console.log(result);
+
+                    @{
+                        
+                    }
+
+
+                    $("#reaction_box").css("background-color", "white");
+                    $("#text1").text("Your latest result is: " + result + "ms");
+                } else{
+                    $("#reaction_box").css("background-color", "red");
+                    $("#text1").text("When box turns green click it fastest you can...");
+                    let x = Math.floor((Math.random() * 6) + 3);
+                    setTimeout(function () {
+                        $("#text1").text("Click now");
+                        $("#reaction_box").css({ "background-color": "green" });
+                        date2 = new Date();
+                    }, x * 1000);
+                    
+                }
+
+                });
+
+            
+
+                
+            });
+        </script>
+        <style>
+            *{
+                padding:0px;
+                margin:0px;
+            }
+        </style>
+    }
+
