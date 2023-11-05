@@ -1,0 +1,82 @@
+﻿
+<div class="bd_nm">
+    <h1>Number Memory</h1>
+    <h2 id="output_level"></h2>
+    <div class="form-floating" id="num_input">
+        <textarea class="form-control" autofocus="autofocus" placeholder="" id="floatingTextarea"></textarea>
+        <label for="floatingTextarea">Put the number here</label>
+    </div>
+    <p id="output_number" class=".unselectable"></p>
+    
+    <button id="bt_start" class="btn-primary">Start</button>
+    <button id="bt_next" class="btn-primary">Next</button>
+</div>
+
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+
+            $("#bt_next").css("visibility", "hidden");
+
+            var i = 1;
+                var num = "";
+                var next = true;
+                var rand = 0;
+                var time = 4000 + i*1000;
+                
+                function game(){
+                    $("#output_level").text("Level " + i);
+                    $("#floatingTextarea").val("");
+                    $("#bt_next").css("visibility", "hidden");
+                    $("#num_input").css("visibility", "hidden");
+
+                    for(var v = 1; v <= i; v++){
+                            rand = Math.floor((Math.random() * 9) + 0);
+                            num += rand;
+                       }
+                       $("#output_number").text("Your number is: " + num);
+                       $("#output_number").css("visibility", "visible");
+                    setTimeout(function () {
+                       
+                       
+                        $("#num_input").css("visibility", "visible");
+                        $("#output_number").css("visibility", "hidden");
+
+                    }, time);
+                    setTimeout(function (){
+                        var answer = $("#floatingTextarea").val();
+                        console.log(answer)
+                        if(answer == num){
+                            i++;
+                            $("#bt_next").css("visibility", "visible");
+                            $("#floatingTextarea").val("Correct!");
+                        } else{
+                            next = false;
+                            $("#bt_start").css("visibility", "visible");
+                            $("#bt_start").text("Restart");
+                            i = 1;
+                            $("#floatingTextarea").val("Incorrect!");
+                        }
+                        
+                        num = "";
+                    }, time + 5000);
+                }
+
+
+            $("#num_input").css("visibility", "hidden");
+            
+            //$("#output_number").css("visibility", "hidden");
+            $("#bt_start").on("click", function(){
+                $("#bt_start").css("visibility", "hidden"); 
+                    game(); 
+            });
+            $("#bt_next").on("click", function(){
+                $("#bt_start").css("visibility", "hidden");
+                    game();
+            });
+        });
+    </script>
+}
+
