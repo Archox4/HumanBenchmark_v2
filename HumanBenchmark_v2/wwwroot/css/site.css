@@ -1,5 +1,6 @@
+
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
@@ -13,8 +14,43 @@ html {
   min-height: 100%;
 }
 
+
+
 body {
-  margin-bottom: 60px;
+    background-image: url('/images/img_bg.jpg');
+    background-size: cover;
+    -webkit-animation: slidein 100s;
+    animation: slidein 100s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+}
+
+@-webkit-keyframes slidein {
+    from {
+        background-position: top;
+        background-size: 3000px;
+    }
+
+    to {
+        background-position: -100px 0px;
+        background-size: 2750px;
+    }
+}
+
+@keyframes slidein {
+    from {
+        background-position: top;
+        background-size: 3000px;
+    }
+
+    to {
+        background-position: -100px 0px;
+        background-size: 2750px;
+    }
 }
 #reaction_box {
     width: 100%;
@@ -39,6 +75,7 @@ body {
         flex-direction:column;
         justify-content: center;
         align-items: center;
+        color: white;
     }
 .cards{
     display: flex;
@@ -60,4 +97,8 @@ body {
 }
 #output_number {
     user-select: none;
+}
+footer, header {
+    background-color: #18191A;
+
 }

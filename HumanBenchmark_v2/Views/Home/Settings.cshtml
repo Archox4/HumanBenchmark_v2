@@ -1,0 +1,16 @@
+﻿@model HumanBenchmark_v2.Models.UserModel
+
+<div class="input-group mb-3 border-dark">
+	<form asp-action="SaveUsername" class="text-white">
+		<span class="input-group-text bg-dark text-white" id="inputGroup-sizing-default">Username</span>
+		<div class="form-group">
+			<label asp-for="Username" class="control-label"></label>
+			<input asp-for="Username" class="form-control" />
+			<span asp-validation-for="Username" class="text-danger"></span>
+		</div>
+		<span class="input-group-text bg-dark text-white" id="inputGroup-sizing-default"><button class="btn text-white">Check</button></span>
+	</form>
+</div>
+
+
+

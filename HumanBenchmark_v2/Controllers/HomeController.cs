@@ -5,6 +5,8 @@ using Firebase.Auth;
 using HumanBenchmark_v2.Models;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using NuGet.Protocol;
+using NuGet.Common;
 
 namespace HumanBenchmark_v2.Controllers
 {
@@ -18,15 +20,23 @@ namespace HumanBenchmark_v2.Controllers
         {
             _logger = logger;
             auth = new FirebaseAuthProvider(new FirebaseConfig("AIzaSyA-eoPydpcHMoMQuuwJtGaPSp_ySJhgPew"));
+            ViewBag.AuthProvider = auth;
             
         }
 
         public IActionResult Index()
         {
             ViewBag.AuthProvider = auth;
+            
             var token = HttpContext.Session.GetString("_UserToken");
+            
             if (token != null)
             {
+                ViewBag.tk = true;
+                DB db = new DB();
+                db.check_user();
+                //Console.WriteLine("token: " + ViewBag.UID);
+
                 return View();
             }
             else
@@ -35,8 +45,13 @@ namespace HumanBenchmark_v2.Controllers
             }
         }
 
-        public IActionResult Privacy()
+        public IActionResult Dashboard()
         {
+            var token = HttpContext.Session.GetString("_UserToken");
+            if (token != null)
+            {
+                ViewBag.tk = true;
+            }
             return View();
         }
 
@@ -47,15 +62,35 @@ namespace HumanBenchmark_v2.Controllers
 
         public IActionResult SignIn()
         {
-            return View();
+			var token = HttpContext.Session.GetString("_UserToken");
+
+			return View();
         }
         public IActionResult ReactionTime()
         {
-            return View();
+            var token = HttpContext.Session.GetString("_UserToken");
+            if (token != null)
+            {
+                ViewBag.tk = true;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("SignIn");
+            }
         }
         public IActionResult NumberMemory()
         {
-            return View();
+            var token = HttpContext.Session.GetString("_UserToken");
+            if (token != null)
+            {
+                ViewBag.tk = true;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("SignIn");
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -92,11 +127,13 @@ namespace HumanBenchmark_v2.Controllers
             var fbAuthLink = await auth
                             .SignInWithEmailAndPasswordAsync(userModel.Email, userModel.Password);
             string token = fbAuthLink.FirebaseToken;
+
             //saving the token in a session variable
             if (token != null)
             {
                 HttpContext.Session.SetString("_UserToken", token);
-
+                Console.WriteLine("token: " + fbAuthLink.User.LocalId);
+                HttpContext.Session.SetString("_UID", fbAuthLink.User.LocalId);
                 return RedirectToAction("Index");
             }
             else
@@ -106,8 +143,61 @@ namespace HumanBenchmark_v2.Controllers
         }
         public IActionResult LogOut()
         {
+            ViewBag.tk = false;
             HttpContext.Session.Remove("_UserToken");
-            return RedirectToAction("SignIn");
+            HttpContext.Session.Remove("_UID");
+            HttpContext.Session.Remove("_Username");
+			return RedirectToAction("SignIn");
         }
-    }
+
+        public IActionResult Settings()
+        {
+            var token = HttpContext.Session.GetString("_UserToken");
+            if (token != null)
+            {
+                ViewBag.tk = true;
+                DB db = new DB();
+                string UID = HttpContext.Session.GetString("_UID");
+                ViewBag.X = UID;
+                if (UID != null)
+                {
+                    string x = db.get_username(ViewBag.X);
+                    HttpContext.Session.SetString("_Username", x);
+                    ViewBag.Username = x;
+                }
+                
+                
+                
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("SignIn");
+            }
+        }
+
+		[HttpPost]
+		public IActionResult SaveUsername(UserModel userModel)
+		{
+			DB db = new DB();
+			if (userModel.Username.Length != 0)
+			{
+				if (db.username_state(userModel.Username) == true)
+				{
+					db.set_username(HttpContext.Session.GetString("_UID"), userModel.Username);
+
+					return RedirectToAction("Index");
+				}
+				else
+				{
+					return View();
+				}
+			}
+			else
+			{
+				return View();
+			}
+
+		}
+	}
 }

@@ -9,5 +9,7 @@ namespace HumanBenchmark_v2.Models
         public string Email { get; set; }
         [Required]
         public string Password { get; set; }
+
+        public string Username { get; set; }
     }
 }

@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[user_scores]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
+	[UID] VARCHAR(30) NOT NULL,
+	[GameID] INT NOT NULL,
+	[Score] INT NOT NULL
+)
