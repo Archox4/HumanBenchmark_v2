@@ -93,6 +93,20 @@ namespace HumanBenchmark_v2.Controllers
             }
         }
 
+        public IActionResult WordsMemory()
+        {
+            var token = HttpContext.Session.GetString("_UserToken");
+            if (token != null)
+            {
+                ViewBag.tk = true;
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("SignIn");
+            }
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

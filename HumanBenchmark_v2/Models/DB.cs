@@ -8,7 +8,7 @@ namespace HumanBenchmark_v2.Models
 		public void check_user()
 		{
 			SqlConnection conn;
-			string constr = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=WebAppDB1;Integrated Security=True;Connect Timeout=30;";
+			string constr = @"Data Source=DESKTOP-FBDMIFK;Initial Catalog=WebAppDB1;Integrated Security=True;";
 			
 			
 			using(conn = new SqlConnection(constr))

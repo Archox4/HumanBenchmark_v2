@@ -1,0 +1,167 @@
+﻿
+
+<div class="d-flex flex-column justify-content-center w-100 text-white">
+    <div class="mt-2">
+        <h3 class="text-center">Score <span id="score" class="text-primary">New</span> (<span id="latest_score" class="text-primary"></span>)</h3>
+    </div>
+    <div class="mt-1">
+        <h4 class="text-info text-center" id="word"></h4>
+    </div>
+    <div class="row flex-nowrap justify-content-center mt-2">
+        <button class="btn-warning border-1 rounded-1" id="btn_seen">SEEN</button>
+        <button class="button btn-info border-1 rounded-1" id="btn_new">NEW</button>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        $(function () {
+            var wordsData = [
+                "Apple", "Bicycle", "Cloud", "Dinosaur", "Elephant", "Forest", "Galaxy", "Harmony", "Igloo", "Jazz",
+                "Kite", "Lantern", "Mountain", "Notebook", "Ocean", "Puzzle", "Quokka", "Rainbow", "Sunflower", "Telescope",
+                "Umbrella", "Volcano", "Whistle", "Xylophone", "Yacht", "Zebra", "Apricot", "Balloon", "Compass", "Dragonfly",
+                "Echo", "Feather", "Glacier", "Hummingbird", "Island", "Jigsaw", "Koala", "Lighthouse", "Moonlight", "Narwhal",
+                "Origami", "Parachute", "Quartz", "Rose", "Starfish", "Treasure", "Unicorn", "Velvet", "Waterfall", "Yawn",
+                "Zigzag", "Avocado", "Butterfly", "Castle", "Dolphin", "Envelope", "Firefly", "Garden", "Honeycomb", "Iceberg",
+                "Jasmine", "Kaleidoscope", "Ladybug", "Marshmallow", "Nebula", "Owl", "Pineapple", "Quicksand", "River", "Snowflake",
+                "Thunder", "Universe", "Violin", "Whisper", "Xenon", "Yogurt", "Zeppelin", "Acorn", "Bubbles", "Coral",
+                "Desert", "Emerald", "Flamenco", "Giraffe", "Hedgehog", "Icicle", "Jewel", "Kangaroo", "Lullaby", "Mistletoe",
+                "Nectarine", "Ocelot", "Pomegranate", "Quill", "Raindrop", "Seashell", "Tornado", "Underwater", "Voyage", "Windmill"
+            ];
+
+            var level = [10,20,30,40,50,60,70,80,90,100];
+            var score = 0;
+            var wordsSeen = [];
+            var randomWords = [];
+            var wordsLimit = 10;
+            addWords();
+            $("#word").text(randomWord());
+            $("#score").text(score);
+            $("#latest_score").text(score);
+            
+            function func_seen(){
+
+                
+                var wordActive = $("#word").text();
+                if (isSeen(wordActive)) {
+                    score++;
+                    
+                    $("#score").text(score);
+                    for (var i = 0; i < level.length; i++) {
+                        if (score == level[i]) {
+                            addWords();
+                        }
+                    }
+                } else {
+                    reset();
+                }
+                $("#word").text(randomWord());
+                console.log(wordsSeen);
+            }
+            function func_new(){
+
+                
+                var wordActive = $("#word").text();
+                if (isSeen(wordActive)) {
+                    reset();
+                } else {
+                    score++;
+                    
+                    $("#score").text(score);
+                    wordsSeen.push(wordActive);
+                    for (var i = 0; i < level.length; i++) {
+                        if (score == level[i]) {
+                            addWords();
+                        }
+                    }
+                }
+                console.log(wordsSeen);
+                $("#word").text(randomWord());
+            }
+            /*
+            function func1(operation) {
+                console.log(wordsSeen);
+                if (operation == "seen") {
+                    var wordActive = $("#word").text();
+                    if(isSeen(wordActive)){
+                        score++;
+                        $("#word").text(randomWords[score]);
+                        $("#score").text(score);
+                        wordsSeen.push(wordActive);
+                        for (var i = 0; i < level.length;i++){
+                            if (score == level[i]) {
+                                addWords();
+                            }
+                        }
+                    } else{
+                        reset();
+                    }
+                } else if(operation == "new"){
+                    if (isSeen(wordActive)) {
+                        reset();
+                    } else{
+                        score++;
+                        $("#word").text(randomWords[score]);
+                        $("#score").text(score);
+                        for (var i = 0; i < level.length; i++) {
+                            if (score == level[i]) {
+                                addWords();
+                            }
+                        }
+                    }
+                }
+            }
+            */
+            $("#btn_seen").click(func_seen);
+            $("#btn_new").click(func_new);
+            function reset(){
+                $("#latest_score").text(score);
+                score = 0;
+                randomWords = [];
+                wordsSeen = [];
+                wordsLimit = 10;
+                addWords();
+                $("#word").val(randomWords[score]);
+                $("#score").text(score);
+            }
+            
+            function isSeen(word) {
+                var seen = false;
+                wordsSeen.forEach(function (item, index) {
+                    if (item == word) {
+                        seen = true;
+                    }
+                });
+                return seen;
+            };
+
+            function randomWord(){
+                var random = Math.floor(Math.random() * randomWords.length);
+                return randomWords[random];
+            }
+
+            function addWords(){
+                var added = 0;
+                while (added < 10) {
+                    var random = Math.floor(Math.random() * 100);
+                    var randomWord = wordsData[random];
+                    var isUnique = true;
+                    randomWords.forEach(function (item, index) {
+                        if(item == randomWord){
+                            isUnique = false;
+                        }
+                    });
+                    if(isUnique){
+                        added++;
+                        randomWords.push(randomWord);
+                    }
+                }
+                console.log(randomWords);
+            }
+
+
+        });
+
+    </script>
+}

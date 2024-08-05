@@ -17,41 +17,12 @@ html {
 
 
 body {
-    background-image: url('/images/img_bg.jpg');
-    background-size: cover;
-    -webkit-animation: slidein 100s;
-    animation: slidein 100s;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-    -webkit-animation-iteration-count: infinite;
-    animation-iteration-count: infinite;
-    -webkit-animation-direction: alternate;
-    animation-direction: alternate;
+    background-image: url('/images/img_bg2.png');
+    background-size: auto;
+    background-position-x: center;
 }
 
-@-webkit-keyframes slidein {
-    from {
-        background-position: top;
-        background-size: 3000px;
-    }
 
-    to {
-        background-position: -100px 0px;
-        background-size: 2750px;
-    }
-}
-
-@keyframes slidein {
-    from {
-        background-position: top;
-        background-size: 3000px;
-    }
-
-    to {
-        background-position: -100px 0px;
-        background-size: 2750px;
-    }
-}
 #reaction_box {
     width: 100%;
     height: 800px;
@@ -101,4 +72,7 @@ body {
 footer, header {
     background-color: #18191A;
 
+}
+#btn_new, #btn_seen{
+    width: 100px;
 }
