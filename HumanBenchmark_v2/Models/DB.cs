@@ -4,7 +4,7 @@ namespace HumanBenchmark_v2.Models
 {
 	public class DB
 	{
-
+		/*
 		public void check_user()
 		{
 			SqlConnection conn;
@@ -106,5 +106,6 @@ namespace HumanBenchmark_v2.Models
 			conn.Close();
 
 		}
+		*/
     }
 }

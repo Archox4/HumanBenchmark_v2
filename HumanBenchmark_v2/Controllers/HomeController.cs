@@ -33,8 +33,8 @@ namespace HumanBenchmark_v2.Controllers
             if (token != null)
             {
                 ViewBag.tk = true;
-                DB db = new DB();
-                db.check_user();
+                //DB db = new DB();
+                //db.check_user();
                 //Console.WriteLine("token: " + ViewBag.UID);
 
                 return View();
@@ -163,12 +163,13 @@ namespace HumanBenchmark_v2.Controllers
             HttpContext.Session.Remove("_Username");
 			return RedirectToAction("SignIn");
         }
-
+        /*
         public IActionResult Settings()
         {
             var token = HttpContext.Session.GetString("_UserToken");
             if (token != null)
             {
+                
                 ViewBag.tk = true;
                 DB db = new DB();
                 string UID = HttpContext.Session.GetString("_UID");
@@ -182,6 +183,7 @@ namespace HumanBenchmark_v2.Controllers
                 
                 
                 
+                
                 return View();
             }
             else
@@ -189,29 +191,32 @@ namespace HumanBenchmark_v2.Controllers
                 return RedirectToAction("SignIn");
             }
         }
+        */
+        /*
+        [HttpPost]
+        public IActionResult SaveUsername(UserModel userModel)
+        {
+            DB db = new DB();
+            if (userModel.Username.Length != 0)
+            {
+                if (db.username_state(userModel.Username) == true)
+                {
+                    db.set_username(HttpContext.Session.GetString("_UID"), userModel.Username);
 
-		[HttpPost]
-		public IActionResult SaveUsername(UserModel userModel)
-		{
-			DB db = new DB();
-			if (userModel.Username.Length != 0)
-			{
-				if (db.username_state(userModel.Username) == true)
-				{
-					db.set_username(HttpContext.Session.GetString("_UID"), userModel.Username);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            else
+            {
+                return View();
+            }
 
-					return RedirectToAction("Index");
-				}
-				else
-				{
-					return View();
-				}
-			}
-			else
-			{
-				return View();
-			}
+        }
+        */
+    }
 
-		}
-	}
 }

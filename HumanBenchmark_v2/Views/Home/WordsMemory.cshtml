@@ -2,7 +2,7 @@
 
 <div class="d-flex flex-column justify-content-center w-100 text-white">
     <div class="mt-2">
-        <h3 class="text-center">Score <span id="score" class="text-primary">New</span> (<span id="latest_score" class="text-primary"></span>)</h3>
+        <h3 class="text-center">Score <span id="score" class="text-primary">New</span> (<span class="text-primary">latest score: </span><span id="latest_score" class="text-primary"></span>)</h3>
     </div>
     <div class="mt-1">
         <h4 class="text-info text-center" id="word"></h4>
@@ -57,7 +57,7 @@
                     reset();
                 }
                 $("#word").text(randomWord());
-                console.log(wordsSeen);
+                //console.log(wordsSeen);
             }
             function func_new(){
 
@@ -76,43 +76,10 @@
                         }
                     }
                 }
-                console.log(wordsSeen);
+                //console.log(wordsSeen);
                 $("#word").text(randomWord());
             }
-            /*
-            function func1(operation) {
-                console.log(wordsSeen);
-                if (operation == "seen") {
-                    var wordActive = $("#word").text();
-                    if(isSeen(wordActive)){
-                        score++;
-                        $("#word").text(randomWords[score]);
-                        $("#score").text(score);
-                        wordsSeen.push(wordActive);
-                        for (var i = 0; i < level.length;i++){
-                            if (score == level[i]) {
-                                addWords();
-                            }
-                        }
-                    } else{
-                        reset();
-                    }
-                } else if(operation == "new"){
-                    if (isSeen(wordActive)) {
-                        reset();
-                    } else{
-                        score++;
-                        $("#word").text(randomWords[score]);
-                        $("#score").text(score);
-                        for (var i = 0; i < level.length; i++) {
-                            if (score == level[i]) {
-                                addWords();
-                            }
-                        }
-                    }
-                }
-            }
-            */
+
             $("#btn_seen").click(func_seen);
             $("#btn_new").click(func_new);
             function reset(){
@@ -157,7 +124,7 @@
                         randomWords.push(randomWord);
                     }
                 }
-                console.log(randomWords);
+                //console.log(randomWords);
             }
 
 
