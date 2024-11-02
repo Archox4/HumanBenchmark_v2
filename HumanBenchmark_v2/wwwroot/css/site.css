@@ -20,6 +20,7 @@ body {
     background-image: url('/images/img_bg2.png');
     background-size: auto;
     background-position-x: center;
+    min-height: 100%;
 }
 
 
