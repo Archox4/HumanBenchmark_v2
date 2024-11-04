@@ -1,6 +1,7 @@
 
 html {
     font-size: 14px;
+    min-height:100%;
 }
 
 @media (min-width: 768px) {
@@ -13,7 +14,6 @@ html {
   position: relative;
   min-height: 100%;
 }
-
 
 
 body {
@@ -56,6 +56,12 @@ body {
     justify-content: space-around;
     width:100%;
 }
+#cardsContainer > div{
+    transition: width 2s, height 4s;
+}
+#cardsContainer > div:hover {
+    margin-bottom: 20px;
+}
 .unselectable {
     -webkit-user-select: none;
     -webkit-touch-callout: none;
@@ -72,8 +78,18 @@ body {
 }
 footer, header {
     background-color: #18191A;
-
 }
 #btn_new, #btn_seen{
     width: 100px;
+}
+@media only screen and (max-width: 994px){
+    .cards {
+        flex-direction: column;
+        align-items: center;
+    }
+    .cards > div {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
 }

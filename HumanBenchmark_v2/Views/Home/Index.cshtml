@@ -2,8 +2,8 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="cards text-white">
-    <div class="card bg-black" style="width: 18rem; height:24rem;">
+<div id="cardsContainer" class="cards text-white">
+    <div class="card bg-black rounded" style="width: 18rem; height:24rem;">
         <img src="images/img_icon1.png" class="card-img-top bg-dark" alt="Reaction Time!">
         <div class="card-body bg-dark border-dark">
             <h5 class="card-title text-white">Reaction time</h5>
@@ -11,7 +11,7 @@
             <a asp-area="" asp-controller="Home" asp-action="ReactionTime" class="btn btn-primary">Go!</a>
         </div>
     </div>
-    <div class="card bg-black" style="width: 18rem;height:24rem;">
+    <div class="card bg-black rounded" style="width: 18rem;height:24rem;">
         <img src="images/img_icon2.png" class="card-img-top bg-dark" alt="Reaction Time!">
         <div class="card-body bg-dark border-dark">
             <h5 class="card-title text-white">Number Memory</h5>
@@ -19,7 +19,7 @@
             <a asp-area="" asp-controller="Home" asp-action="NumberMemory" class="btn btn-primary">Go!</a>
         </div>
     </div>
-    <div class="card bg-black" style="width: 18rem;height:24rem;">
+    <div class="card bg-black rounded" style="width: 18rem;height:24rem;">
         <img src="images/img_icon3.png" class="card-img-top bg-dark" alt="Reaction Time!">
         <div class="card-body bg-dark border-dark">
             <h5 class="card-title text-white">Words Memory</h5>
