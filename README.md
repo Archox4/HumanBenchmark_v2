@@ -1,1 +1,1 @@
-C# MVC app inpired by Human benchamark
+C# MVC app inspired by Human benchamark
